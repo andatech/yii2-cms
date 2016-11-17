@@ -1,0 +1,5 @@
+.form-control[disabled],
+.form-control[readonly],
+fieldset[disabled] .form-control {
+    background-color: #d2d6de;
+}
