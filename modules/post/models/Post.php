@@ -126,8 +126,8 @@ class Post extends ActiveRecord
 
     public static function find()
     {
-        return parent::find()
-            ->joinWith(['category as cat', 'createdBy.profile prof'])
+            return parent::find()
+            ->joinWith(['category cat', 'createdBy.profile prof'])
             ->where(['deleted_at' => null]);
     }
 

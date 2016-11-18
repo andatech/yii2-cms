@@ -2,6 +2,7 @@
 
 namespace anda\cms\modules\post\models;
 
+use kcfinder\path;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
@@ -47,9 +48,7 @@ class PostSearch extends Post
      */
     public function search($params)
     {
-        $query = parent::find();
-
-//        $query->joinWith(['category', 'createdBy.profile']);
+        $query = static::find();
 
         // add conditions that should always apply here
 
@@ -58,7 +57,6 @@ class PostSearch extends Post
             'sort'=> ['defaultOrder' => ['id'=>SORT_DESC]]
         ]);
 
-//        $da
 
         $dataProvider->sort->attributes['created_by'] = [
             'asc' => ['created_by' => SORT_ASC],
@@ -75,30 +73,30 @@ class PostSearch extends Post
 
         // grid filtering conditions
         $query->andFilterWhere([
-            self::tableName().'.id' => $this->id,
-            'category_id' => $this->category_id,
-            'status' => $this->status,
-            'hits' => $this->hits,
-            'published_at' => $this->published_at,
-            'publish_up' => $this->publish_up,
-            'publish_down' => $this->publish_down,
-            'version' => $this->version,
-//            'created_by' => $this->created_by,
-            'created_at' => $this->created_at,
-            'updated_by' => $this->updated_by,
-            'updated_at' => $this->updated_at,
-            'deleted_at' => $this->deleted_at,
+            parent::tableName().'.id' => $this->id,
+            parent::tableName().'.category_id' => $this->category_id,
+            parent::tableName().'.status' => $this->status,
+            parent::tableName().'.hits' => $this->hits,
+            parent::tableName().'.published_at' => $this->published_at,
+            parent::tableName().'.publish_up' => $this->publish_up,
+            parent::tableName().'.publish_down' => $this->publish_down,
+            parent::tableName().'.version' => $this->version,
+//            parent::tableName().'.created_by' => $this->created_by,
+            parent::tableName().'.created_at' => $this->created_at,
+            parent::tableName().'.updated_by' => $this->updated_by,
+            parent::tableName().'.updated_at' => $this->updated_at,
+            parent::tableName().'.deleted_at' => $this->deleted_at,
 //            Category::tableName().'.root' => $this->category_root,
         ]);
 
-        $query->andFilterWhere(['like', self::tableName().'.title', $this->title])
-            ->andFilterWhere(['like', self::tableName().'.slug', $this->slug])
-            ->andFilterWhere(['like', self::tableName().'.introtext', $this->introtext])
-            ->andFilterWhere(['like', self::tableName().'.content', $this->content])
-            ->andFilterWhere(['like', self::tableName().'.image', $this->image])
-            ->andFilterWhere(['like', self::tableName().'.meta_title', $this->meta_title])
-            ->andFilterWhere(['like', self::tableName().'.meta_keywords', $this->meta_keywords])
-            ->andFilterWhere(['like', self::tableName().'.meta_description', $this->meta_description])
+        $query->andFilterWhere(['like', parent::tableName().'.title', $this->title])
+            ->andFilterWhere(['like', parent::tableName().'.slug', $this->slug])
+            ->andFilterWhere(['like', parent::tableName().'.introtext', $this->introtext])
+            ->andFilterWhere(['like', parent::tableName().'.content', $this->content])
+            ->andFilterWhere(['like', parent::tableName().'.image', $this->image])
+            ->andFilterWhere(['like', parent::tableName().'.meta_title', $this->meta_title])
+            ->andFilterWhere(['like', parent::tableName().'.meta_keywords', $this->meta_keywords])
+            ->andFilterWhere(['like', parent::tableName().'.meta_description', $this->meta_description])
             ->andFilterWhere(['like', 'prof.firstname', $this->created_by]);
 
         $query->andFilterWhere(['like', self::tableName().'.title', $this->globalSearch])
