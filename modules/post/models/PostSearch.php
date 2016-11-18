@@ -99,8 +99,8 @@ class PostSearch extends Post
             ->andFilterWhere(['like', parent::tableName().'.meta_description', $this->meta_description])
             ->andFilterWhere(['like', 'prof.firstname', $this->created_by]);
 
-        $query->andFilterWhere(['like', self::tableName().'.title', $this->globalSearch])
-            ->orFilterWhere(['like', self::tableName().'.content', $this->globalSearch]);
+        $query->andFilterWhere(['like', parent::tableName().'.title', $this->globalSearch])
+            ->orFilterWhere(['like', parent::tableName().'.content', $this->globalSearch]);
 
         return $dataProvider;
     }
