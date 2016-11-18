@@ -23,11 +23,13 @@ class TrashController extends Controller
         $searchModel = new $modelSearchClass();
 
         $params = Yii::$app->request->queryParams;
-        if ($this->module->id !== 'post'){
-            $params = array_replace_recursive($params, [$searchModel->formName() => ['category_root' => $this->categoryRoot->id]]);
-        }
 
         $dataProvider = $searchModel->search($params);
+
+        if ($this->module->id !== 'post' && isset($this->getCategoryRoot()->id)) {
+            $dataProvider->query->andFilterWhere(['root' => $this->getCategoryRoot()->id]);
+
+        }
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -84,7 +86,7 @@ class TrashController extends Controller
     protected function findModel($id)
     {
         $modelClass = $this->modelClass;
-        if (($model = $modelClass::find()->where(['!=', 'deleted_at', !null])->andWhere(['id'=>$id])->one()) !== null) {
+        if (($model = $modelClass::find()->where(['!=', 'deleted_at', !null])->andWhere([$modelClass::tableName().'.id'=>$id])->one()) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

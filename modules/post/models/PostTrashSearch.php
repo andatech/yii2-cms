@@ -67,7 +67,7 @@ class PostTrashSearch extends PostSearch
             self::tableName().'.updated_by' => $this->updated_by,
             self::tableName().'.updated_at' => $this->updated_at,
             self::tableName().'.deleted_at' => $this->deleted_at,
-            Category::tableName().'.root' => $this->category_root,
+//            Category::tableName().'.root' => $this->category_root,
         ]);
 
         $userProfileClass = Yii::$app->user->identity->profile->className();

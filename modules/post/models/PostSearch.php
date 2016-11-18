@@ -91,7 +91,6 @@ class PostSearch extends Post
 //            Category::tableName().'.root' => $this->category_root,
         ]);
 
-        $userProfileClass = Yii::$app->user->identity->profile->className();
         $query->andFilterWhere(['like', self::tableName().'.title', $this->title])
             ->andFilterWhere(['like', self::tableName().'.slug', $this->slug])
             ->andFilterWhere(['like', self::tableName().'.introtext', $this->introtext])
@@ -100,7 +99,7 @@ class PostSearch extends Post
             ->andFilterWhere(['like', self::tableName().'.meta_title', $this->meta_title])
             ->andFilterWhere(['like', self::tableName().'.meta_keywords', $this->meta_keywords])
             ->andFilterWhere(['like', self::tableName().'.meta_description', $this->meta_description])
-            ->andFilterWhere(['like', $userProfileClass::tableName().'.firstname', $this->created_by]);
+            ->andFilterWhere(['like', 'prof.firstname', $this->created_by]);
 
         $query->andFilterWhere(['like', self::tableName().'.title', $this->globalSearch])
             ->orFilterWhere(['like', self::tableName().'.content', $this->globalSearch]);

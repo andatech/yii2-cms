@@ -127,7 +127,7 @@ class Post extends ActiveRecord
     public static function find()
     {
         return parent::find()
-            ->joinWith(['category', 'createdBy.profile'])
+            ->joinWith(['category as cat', 'createdBy.profile prof'])
             ->where(['deleted_at' => null]);
     }
 
@@ -185,12 +185,12 @@ class Post extends ActiveRecord
 
     public function getCreatedBy()
     {
-        return $this->hasOne(Yii::$app->user->identity->className(), ['id' => 'created_by']);
+        return $this->hasOne(Yii::$app->user->identityClass, ['id' => 'created_by']);
     }
 
     public function getUpdatedBy()
     {
-        return $this->hasOne(Yii::$app->user->identity->className(), ['id' => 'updated_by']);
+        return $this->hasOne(Yii::$app->user->identityClass, ['id' => 'updated_by']);
     }
 
 

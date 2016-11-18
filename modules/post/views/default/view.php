@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 $gropHeaderOptions = [
     'style' => 'background-color: #d2d6de'
 ];
-
+echo $model->createdBy->profile->className();
 ?>
 <div class="post-view">
     <div class="row">

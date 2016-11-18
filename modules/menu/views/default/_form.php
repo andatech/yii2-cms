@@ -32,7 +32,7 @@ use yii\web\JsExpression;
         <div class="box-body">
             <?= $form->field($model, 'id')->textInput(['disabled' => true]) ?>
 
-            <?= $form->field($model, 'title')->textInput(['maxlength' => true]) ?>
+            <?= $form->field($model, 'title')->textInput(['maxlength' => true, 'autofocus' => true]) ?>
 
             <?= $form->field($model, 'type', ['options' => ['style' => 'margin-bottom: 0;']])->radioList($model->getTypeList(true), [
                 'class' => 'btn-group',

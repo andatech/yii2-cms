@@ -29,7 +29,7 @@ class NestedSetQueryBehavior extends Behavior
                     if (!strpos($replaced, '/')) {
                         $replaced .= '/view';
                     }
-                    $url = Url::to([$replaced, 'id' => $root->{$root->idAttribute}]);
+                    $url = Url::to([$replaced, 'id' => $root->{$root->moduleRecordIdAttribute}]);
 
                     break;
                 case $root::TYPE_NONE : $url = '#!'; break;

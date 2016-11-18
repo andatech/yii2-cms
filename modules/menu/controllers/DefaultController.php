@@ -102,7 +102,7 @@ class DefaultController extends Controller
                 $root = $this->findModel(intval($parent_id));
                 $model->appendTo($root);
             }
-            return $this->redirect(['index', 'id' => $model->id]);
+            return $this->redirect(['index', 'root' => $model->root, 'id' => $model->id]);
         } else {
             if (Yii::$app->request->isAjax){
                 return $this->renderAjax('create', [
