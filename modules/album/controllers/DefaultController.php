@@ -23,6 +23,8 @@ class DefaultController extends Controller
 {
     public $modelClass = 'anda\cms\modules\album\models\Album';
 
+    public $modelSearchClass = 'anda\cms\modules\album\models\AlbumSearch';
+
     public function beforeAction($action)
     {
         $myCategory = Category::find()->where(['name' => $this->module->id])->roots()->one();

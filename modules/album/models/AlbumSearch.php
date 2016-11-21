@@ -6,5 +6,5 @@ use anda\cms\modules\post\models\PostSearch;
 
 class AlbumSearch extends PostSearch
 {
-
+    public $myName = 'album';
 }

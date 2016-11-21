@@ -2,7 +2,7 @@
 
 namespace anda\cms\modules\post\models;
 
-use kcfinder\path;
+//use kcfinder\path;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;

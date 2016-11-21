@@ -6,6 +6,8 @@ use anda\cms\modules\post\models\Post as ActiveRecord;
 
 class Carousel extends ActiveRecord
 {
+    public $myName = 'carousel';
+
     function behaviors()
     {
         $behaviors = parent::behaviors();

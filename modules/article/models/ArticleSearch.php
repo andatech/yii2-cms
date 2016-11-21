@@ -6,5 +6,5 @@ use anda\cms\modules\post\models\PostSearch;
 
 class ArticleSearch extends PostSearch
 {
-    
+    public $myName = 'article';
 }

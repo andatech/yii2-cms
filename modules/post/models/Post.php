@@ -259,7 +259,7 @@ class Post extends ActiveRecord
     }
 
 
-    public function getImageUrl($attr)
+    public function getImageUrl($attr, $imgNone = true)
     {
         $imageBehavior = $this->getBehavior('crop-image')->attributes[$attr];
         $filename = $imageBehavior['savePathAlias'].$this->{$attr};
@@ -267,8 +267,12 @@ class Post extends ActiveRecord
             return parent::getImageUrl($attr);
         }
 
-        $clientsPath = Yii::$app->assetManager->getPublishedUrl('@anda/cms/clients');
-        return $clientsPath.'/images/image-none.jpg';
+        if($imgNone) {
+            $clientsPath = Yii::$app->assetManager->getPublishedUrl('@anda/cms/clients');
+            return $clientsPath . '/images/image-none.jpg';
+        }else{
+            return null;
+        }
     }
 
     public function getContentPreview()

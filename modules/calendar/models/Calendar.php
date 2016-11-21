@@ -6,6 +6,7 @@ use anda\cms\modules\post\models\Post as ActiveRecord;
 
 class Calendar extends ActiveRecord
 {
+    public $myName = 'calendar';
     /**
      * @inheritdoc
      */

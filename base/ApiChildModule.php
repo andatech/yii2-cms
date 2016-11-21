@@ -33,12 +33,11 @@ class ApiChildModule extends Object
         }
     }
 
-    public function view($id, $counter = true)
+    public function view($id, $seo = true, $counter = true)
     {
         $model = $this->get($id);
-        if ($counter) {
-            $model->updateCounters(['hits' => 1]);
-        }
+        if ($counter) { $model->updateCounters(['hits' => 1]);}
+        if($seo) { $this->setItemSeo($model); }
 
         return $model;
     }
@@ -95,7 +94,6 @@ class ApiChildModule extends Object
 
     public function getDataProvider()
     {
-
         $itemRoot = $this->getItemRoot();
 
         $params = Yii::$app->request->queryParams;
@@ -107,6 +105,28 @@ class ApiChildModule extends Object
         }
 
         return $dataProvider;
+    }
+
+    public function setItemSeo($model)
+    {
+        $view = Yii::$app->getView();
+
+        $seos['title'] = (empty($model->meta_title) || is_null($model->meta_title)) ? $model->title : $model->meta_title;
+        $seos['keywords'] = (empty($model->meta_keywords) || is_null($model->meta_keywords)) ? Yii::$app->name : $model->meta_keywords.', '.Yii::$app->name;
+        $seos['description'] = (empty($model->meta_description) || is_null($model->meta_description)) ? $model->getContentPreview() : $model->meta_description;
+        $seos['og:url'] = Yii::$app->request->absoluteUrl;
+        $seos['og:title'] = $seos['title'];
+        $seos['og:description'] = $seos['description'];
+        $seos['og:type'] = 'website';
+        $seos['og:image'] = $model->getImageUrl('image', false);
+        $seos['og:site_name'] = Yii::$app->name;
+
+        foreach ($seos as $key => $seo) {
+            if (!is_null($seo)) {
+                $view->registerMetaTag(['name' => $key, 'content' => $seo], $key);
+            }
+        }
+
     }
 
     public function find()

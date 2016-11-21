@@ -10,6 +10,9 @@ use anda\cms\modules\post\controllers\DefaultController as Controller;
  */
 class DefaultController extends Controller
 {
+    public $modelClass = 'anda\cms\modules\article\models\Article';
+
+    public $modelSearchClass = 'anda\cms\modules\article\models\ArticleSearch';
 
     public function beforeAction($action)
     {
