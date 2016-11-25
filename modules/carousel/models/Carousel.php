@@ -19,8 +19,8 @@ class Carousel extends ActiveRecord
                 'crop' => true,
                 'attributes' => [
                     'image' => [
-                        'savePathAlias' => $this->masterModule->uploadDir.'/carousel/',
-                        'urlPrefix' => $this->masterModule->uploadUrl.'/carousel/',
+                        'savePathAlias' => $this->masterModule->uploadDir.'/'.$this->myName.'/',
+                        'urlPrefix' => $this->masterModule->uploadUrl.'/'.$this->myName.'/',
 //                        'width' => 750,
 //                        'height' => 264,
                     ],

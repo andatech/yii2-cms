@@ -86,7 +86,7 @@ class Menu extends ActiveRecord
             [['root', 'lft', 'rgt', 'level', 'status', 'type', 'module_record_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'integer'],
             [['status', 'title', 'type'], 'required'],
             [['title'], 'string', 'max' => 512],
-            [['url'], 'url', 'defaultScheme' => 'http'],
+//            [['url'], 'url', 'defaultScheme' => 'http'],
             [['url', 'module_id', 'module_record_id', 'created_by', 'created_at', 'updated_by', 'updated_at'], 'safe'],
         ];
     }

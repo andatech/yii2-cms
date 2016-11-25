@@ -3,6 +3,7 @@ namespace anda\cms\modules\menu\api;
 
 use Yii;
 use anda\cms\base\ApiChildModule;
+use anda\cms\helpers\Data;
 
 class Menu extends ApiChildModule
 {
@@ -34,14 +35,15 @@ class Menu extends ApiChildModule
 
     public function getDataMenu($root = 0, $level = null, $action = [])
     {
-        $data = $this->_model->dataMenu($root, $level, $action);
-        $result = []; //current($data);
-        if (count($data) > 0 && isset(current($data)['items'])) {
-            $result = current($data)['items'];
-        }
-//        if(isset($data[0]) && isset($data[0]['items'])) {
-//            $result = $data[0]['items'];
-//        }
+        $result = Data::cache('andacmsMenu'.$root, 3600, function() use ($root, $level, $action){
+            $items = [];
+            $data = $this->_model->dataMenu($root, $level, $action);
+            if (count($data) > 0 && isset(current($data)['items'])) {
+                $items = current($data)['items'];
+            }
+
+            return $items;
+        });
 
         return $result;
     }

@@ -5,10 +5,13 @@ namespace anda\cms;
 use Yii;
 use anda\cms\models\Module as ModuleModel;
 use anda\cms\models\Setting;
+use anda\cms\helpers\Data;
+use yii\base\BootstrapInterface;
+
 /**
  * cms module definition class
  */
-class Module extends \yii\base\Module
+class Module extends \yii\base\Module implements BootstrapInterface
 {
     /**
      * @inheritdoc
@@ -57,7 +60,7 @@ class Module extends \yii\base\Module
 
         $this->registerTranslations();
 
-        $this->bootstrapping();
+//        $this->bootstrapping();
     }
 
     /**
@@ -80,7 +83,6 @@ class Module extends \yii\base\Module
     {
         $modules = [];
         $this->activeModules = ModuleModel::findAllActive();
-//        print_r($this->activeModules);
         foreach ($this->activeModules as $name => $module) {
             $modules[$name]['class'] = $module->class;
             $modules[$name]['icon'] = $module->icon;
@@ -88,6 +90,7 @@ class Module extends \yii\base\Module
                 $modules[$name]['settings'] = $module->settings;
             }
         }
+
         $this->setModules($modules);
     }
 
@@ -166,13 +169,22 @@ class Module extends \yii\base\Module
         $session->set('ANDACMS', $tmp);
     }
 
-    protected function bootstrapping()
+    public function bootstrap($app)
     {
-        $app = Yii::$app;
-        $model = Setting::find()->all();
-        foreach ($model as $section){
-            $settings[$section->type][$section->name] = $section->value;
-        }
+//        $model = Setting::find()->all();
+//        foreach ($model as $section){
+//            $settings[$section->type][$section->name] = $section->value;
+//        }
+
+        $settings = Data::cache(Setting::CACHE_KEY, 3600, function() {
+            $model = Setting::find()->all();
+            $settings = [];
+            foreach ($model as $section){
+                $settings[$section->type][$section->name] = $section->value;
+            }
+
+            return $settings;
+        });
 
         $general = $settings['general'];
         $app->name = $general['title'];

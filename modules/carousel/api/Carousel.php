@@ -7,4 +7,6 @@ use anda\cms\base\ApiChildModule;
 class Carousel extends ApiChildModule
 {
     public $modelClass = 'anda\cms\modules\carousel\models\Carousel';
+
+    public $modelSearchClass = 'anda\cms\modules\carousel\models\CarouselSearch';
 }

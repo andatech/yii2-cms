@@ -4,6 +4,7 @@ namespace anda\cms\models;
 
 use Yii;
 use wowkaster\serializeAttributes\SerializeAttributesBehavior;
+use anda\cms\helpers\Data;
 
 /**
  * This is the model class for table "{{%web_module}}".
@@ -22,6 +23,8 @@ class Module extends \anda\cms\base\Model
     /**
      * @inheritdoc
      */
+    const CACHE_KEY = 'andacmsModules';
+
     const STATUS_ON = 1;
 
     const STATUS_OFF = 0;
@@ -77,11 +80,22 @@ class Module extends \anda\cms\base\Model
      * @return array
      */
     public static function findAllActive(){
-        $result = [];
-        foreach (self::find()->where(['status' => self::STATUS_ON])->orderBy('order_num')->all() as $module) {
-            //$module->trigger(self::EVENT_AFTER_FIND);
-            $result[$module->name] = (object)$module->attributes;
-        }
+//        $result = [];
+//        foreach (self::find()->where(['status' => self::STATUS_ON])->orderBy('order_num')->all() as $module) {
+//            $result[$module->name] = (object)$module->attributes;
+//        }
+//
+//        return $result;
+
+
+        $result = Data::cache(self::CACHE_KEY, 3600, function() {
+            $result = [];
+            foreach (self::find()->where(['status' => self::STATUS_ON])->orderBy('order_num')->all() as $module) {
+                $result[$module->name] = (object)$module->attributes;
+            }
+
+            return $result;
+        });
 
         return $result;
     }
