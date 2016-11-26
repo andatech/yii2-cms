@@ -31,7 +31,8 @@
         "maxmirazh33/yii2-uploadable-cropable-image": "*",
         "wowkaster/yii2-serialize-attributes": "dev-master",
         "wbraganca/yii2-nested-set-behavior": "*",
-        "wbraganca/yii2-fancytree-widget": "*"
+        "wbraganca/yii2-fancytree-widget": "*",
+        "yii2tech/ar-softdelete": "*"
     },
     "autoload": {
         "psr-4": {
