@@ -29,7 +29,9 @@
         "kartik-v/yii2-mpdf": "*",
         "kartik-v/yii2-tree-manager": "@dev",
         "maxmirazh33/yii2-uploadable-cropable-image": "*",
-        "wowkaster/yii2-serialize-attributes": "dev-master"
+        "wowkaster/yii2-serialize-attributes": "dev-master",
+        "wbraganca/yii2-nested-set-behavior": "*",
+        "wbraganca/yii2-fancytree-widget": "*"
     },
     "autoload": {
         "psr-4": {
