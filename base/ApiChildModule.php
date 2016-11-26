@@ -15,6 +15,8 @@ class ApiChildModule extends Object
 
     public $moduleId;
 
+    public $_model;
+
     public $_searchModel;
 
 
@@ -136,6 +138,7 @@ class ApiChildModule extends Object
         if ($itemRoot !== false) {
             return $modelClass::find()->andWhere(['root' => $itemRoot]);
         }
-        return $modelClass::find();
+        $this->_model = $modelClass::find();
+        return $this->_model;
     }
 }
