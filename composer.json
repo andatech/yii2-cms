@@ -21,6 +21,7 @@
         "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap": "*",
         "andatech/yii2-user":"dev-master",
+        "andatech/yii2-filemanager":"dev-master",
         "2amigos/yii2-ckeditor-widget": "^2.0",
         "sunhater/kcfinder": "dev-master",
         "kartik-v/yii2-widgets": "*",
