@@ -34,19 +34,19 @@
 
         $menu1 = [
             ['label' => 'Modules', 'options' => ['class' => 'header']],
-            ['label' => 'Dashboard', 'icon' => 'fa fa-dashboard', 'url' => ['/'.$masterModule->id.'/default/index']],
+            ['label' => Yii::t('andacms', 'Dashboard'), 'icon' => 'fa fa-dashboard', 'url' => ['/'.$masterModule->id.'/default/index']],
         ];
         $dynamicMenus = [];
         $activeModules = $masterModule->activeModules;
         //print_r($this->context->module->activeModules());
         foreach ($activeModules as $key => $activeModule){
-            $dynamicMenus[] = ['label' => $activeModule->title, 'icon' => $activeModule->icon, 'url' => ['/'.$masterModule->id.'/'.$key]];
+            $dynamicMenus[] = ['label' => Yii::t('andacms', $activeModule->title), 'icon' => $activeModule->icon, 'url' => ['/'.$masterModule->id.'/'.$key]];
         }
 
         $menu2 = [
-            ['label' => 'Administrators', 'options' => ['class' => 'header']],
-            ['label' => 'Settings', 'icon' => 'fa fa-cog', 'url' => ['/'.$masterModule->id.'/settings']],
-            ['label' => 'Module', 'icon' => 'fa fa-cubes', 'url' => ['/'.$masterModule->id.'/module']],
+            ['label' => Yii::t('andacms', 'Administrators'), 'options' => ['class' => 'header']],
+            ['label' => Yii::t('andacms', 'Settings'), 'icon' => 'fa fa-cog', 'url' => ['/'.$masterModule->id.'/settings']],
+            ['label' => Yii::t('andacms', 'Module'), 'icon' => 'fa fa-cubes', 'url' => ['/'.$masterModule->id.'/module']],
         ];
         ?>
         <?= dmstr\widgets\Menu::widget(

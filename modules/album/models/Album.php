@@ -78,6 +78,21 @@ class Album extends ActiveRecord
         return $images;
     }
 
+    public function getImages()
+    {
+        $items = [];
+        $dirs = $this->getDirectories();
+        $images = $this->getBaseImages();
+        foreach ($images as $key => $image) {
+            $items[] = [
+                'full' => $this->resolvePath($dirs['full'].'/'.basename($image)),
+                'thumb' => $this->resolvePath($dirs['thumb'].'/'.basename($image))
+            ];
+        }
+
+        return $items;
+    }
+
     public function getInitialPreview()
     {
         $imagesUrl = [];

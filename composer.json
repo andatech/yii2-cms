@@ -21,19 +21,14 @@
         "yiisoft/yii2": "*",
         "yiisoft/yii2-bootstrap": "*",
         "andatech/yii2-user":"dev-master",
-        "andatech/yii2-filemanager":"dev-master",
         "2amigos/yii2-ckeditor-widget": "^2.0",
         "sunhater/kcfinder": "dev-master",
         "kartik-v/yii2-widgets": "*",
         "kartik-v/yii2-grid": "@dev",
         "kartik-v/yii2-export": "*",
         "kartik-v/yii2-mpdf": "*",
-        "kartik-v/yii2-tree-manager": "@dev",
-        "maxmirazh33/yii2-uploadable-cropable-image": "*",
-        "wowkaster/yii2-serialize-attributes": "dev-master",
-        "wbraganca/yii2-nested-set-behavior": "*",
-        "wbraganca/yii2-fancytree-widget": "*",
-        "yii2tech/ar-softdelete": "*"
+        "kartik-v/yii2-detail-view": "*",
+        "maxmirazh33/yii2-uploadable-cropable-image": "*"
     },
     "autoload": {
         "psr-4": {
