@@ -70,6 +70,7 @@ class Album extends ActiveRecord
         if(is_dir($dirs['thumb'])){
             $files = FileHelper::findFiles($dirs['thumb']);
         }
+        sort($files);
         foreach ($files as $file){
             if($this->isImage($file)){
                 $images[] = $file;

@@ -3,6 +3,7 @@
 namespace anda\cms\base;
 
 use Yii;
+use yii\helpers\Url;
 use yii\base\Object;
 use yii\web\NotFoundHttpException;
 use anda\cms\modules\category\models\Category;
@@ -113,20 +114,38 @@ class ApiChildModule extends Object
     {
         $view = Yii::$app->getView();
 
-        $seos['title'] = (empty($model->meta_title) || is_null($model->meta_title)) ? $model->title : $model->meta_title;
-        $seos['keywords'] = (empty($model->meta_keywords) || is_null($model->meta_keywords)) ? Yii::$app->name : $model->meta_keywords.', '.Yii::$app->name;
-        $seos['description'] = (empty($model->meta_description) || is_null($model->meta_description)) ? $model->getContentPreview() : $model->meta_description;
-        $seos['og:url'] = Yii::$app->request->absoluteUrl;
-        $seos['og:title'] = $seos['title'];
-        $seos['og:description'] = $seos['description'];
-        $seos['og:type'] = 'website';
-        $seos['og:image'] = $model->getImageUrl('image', false);
-        $seos['og:site_name'] = Yii::$app->name;
+//        $seos['title'] = (empty($model->meta_title) || is_null($model->meta_title)) ? $model->title : $model->meta_title;
+//        $seos['keywords'] = (empty($model->meta_keywords) || is_null($model->meta_keywords)) ? Yii::$app->name : $model->meta_keywords.', '.Yii::$app->name;
+//        $seos['description'] = (empty($model->meta_description) || is_null($model->meta_description)) ? $model->getContentPreview() : $model->meta_description;
+//        $seos['og:url'] = Yii::$app->request->absoluteUrl;
+//        $seos['og:title'] = $seos['title'];
+//        $seos['og:description'] = $seos['description'];
+//        $seos['og:type'] = 'website';
+//        $seos['og:image'] = Url::base(true).$model->getImageUrl('image', false);
+////        $seos['og:image'] = Url::base(true).'/media/parallax/img/bg.png';
+//        $seos['og:site_name'] = Yii::$app->name;
 
-        foreach ($seos as $key => $seo) {
-            if (!is_null($seo)) {
-                $view->registerMetaTag(['name' => $key, 'content' => $seo], $key);
-            }
+//        foreach ($seos as $key => $seo) {
+//            if (!is_null($seo)) {
+//                $view->registerMetaTag(['name' => $key, 'content' => $seo], $key);
+//            }
+//        }
+
+        $seos = [
+            'title' => ['name' => 'description', 'content' => (empty($model->meta_title) || is_null($model->meta_title)) ? $model->title : $model->meta_title],
+            'description' => ['name' => 'description', 'content' => (empty($model->meta_description) || is_null($model->meta_description)) ? $model->getContentPreview() : $model->meta_description],
+            'keywords' => ['name' => 'keywords', 'content' => (empty($model->meta_keywords) || is_null($model->meta_keywords)) ? Yii::$app->name : $model->meta_keywords.', '.Yii::$app->name],
+            'content-language' => ['name' => 'content-language', 'content' => Yii::$app->language],
+            'content-type' => ['name' => 'content-type', 'content' => 'text/html; charset='.Yii::$app->charset],
+
+            'og:url' => ['property' => 'og:url', 'content' => Yii::$app->request->absoluteUrl],
+            'og:type' => ['property' => 'og:type', 'content' => 'website'],
+            'og:title' => ['property' => 'og:title', 'content' => (empty($model->meta_title) || is_null($model->meta_title)) ? $model->title : $model->meta_title],
+            'og:description' => ['property' => 'og:description', 'content' => (empty($model->meta_description) || is_null($model->meta_description)) ? $model->getContentPreview() : $model->meta_description],
+            'og:image' => ['property' => 'og:image', 'content' => Url::base(true).$model->getImageUrl('image', false)],
+        ];
+        foreach ($seos as $key => $seo){
+            $view->registerMetaTag($seo, $key);
         }
 
     }

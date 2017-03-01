@@ -45,6 +45,8 @@ class Page extends ActiveRecord
     const STATUS_UNPUBLISHED = 2;
     const STATUS_DRAFT = 3;
     const STATUS_ARCHIVED = 4;
+
+    public $content_module;
     /**
      * @inheritdoc
      */
@@ -270,5 +272,17 @@ class Page extends ActiveRecord
     {
         $date = new \DateTime();
         return $date->format('d-m-Y H:i:s');
+    }
+    
+    public function getContentModules()
+    {
+        $modules = array_keys(Yii::$app->modules);
+        $skipModules = ['user','gridview', 'treemanager', 'web-admin', 'debug', 'gii'];
+        $diff = array_diff($modules, $skipModules);
+        $contentModules[null] = 'main';
+        foreach ($diff as $m) {
+            $contentModules[$m] = '/'.$m;
+        }
+        return $contentModules;
     }
 }

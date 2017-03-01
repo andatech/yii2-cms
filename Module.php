@@ -193,15 +193,24 @@ class Module extends \yii\base\Module implements BootstrapInterface
         $app->formatter->dateFormat = $general['dateformat'];
         $app->formatter->timeFormat = $general['timeformat'];
         $app->view->title = $general['title'];
+
         $seos = [
-            'description' => $general['description'],
-            'keywords' => $general['keywords'],
-            'content-language' => $general['language'],
-            'content-type' => 'text/html; charset='.$app->charset,
+            'description' => ['name' => 'description', 'content' => $general['description']],
+            'keywords' => ['name' => 'description', 'content' => $general['keywords']],
+            'content-language' => ['name' => 'content-language', 'content' => $general['language']],
+            'content-type' => ['name' => 'content-type', 'content' => 'text/html; charset='.$app->charset],
+
+            'og:url' => ['property' => 'og:url', 'content' => Yii::$app->request->absoluteUrl],
+            'og:type' => ['property' => 'og:type', 'content' => 'website'],
+            'og:title' => ['property' => 'og:title', 'content' => $general['title']],
+            'og:description' => ['property' => 'og:description', 'content' => $general['description']],
+            'og:image' => ['property' => 'og:image', 'content' => 'http://www.comm-sci.pn.psu.ac.th/media/parallax/img/bg.png'],
         ];
+
         foreach ($seos as $key => $seo){
-            $app->view->registerMetaTag(['name' => $key, 'content' => $seo], $key);
+            $app->view->registerMetaTag($seo, $key);
         }
+
     }
 
     public function registerTranslations()

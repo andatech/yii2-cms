@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'icon')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'settings')->textarea(['rows' => 6]) ?>
+    <?php //echo $form->field($model, 'settings')->textarea(['rows' => 6]) ?>
 
     <?= $form->field($model, 'order_num')->textInput() ?>
 

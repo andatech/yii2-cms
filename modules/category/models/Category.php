@@ -67,7 +67,7 @@ class Category extends ActiveRecord
                         'savePathAlias' => $this->masterModule->uploadDir.'/category/',
                         'urlPrefix' => $this->masterModule->uploadUrl.'/category/',
                         'width' => 200,
-                        'height' => 100,
+                        'height' => 200,
                     ],
                 ],
             ],
@@ -219,5 +219,21 @@ class Category extends ActiveRecord
     {
         $date = new \DateTime();
         return $date->format('d-m-Y H:i:s');
+    }
+
+    public function getImageUrl($attr, $imgNone = true)
+    {
+        $imageBehavior = $this->getBehavior('crop-image')->attributes[$attr];
+        $filename = $imageBehavior['savePathAlias'].$this->{$attr};
+        if(is_file($filename)) {
+            return parent::getImageUrl($attr);
+        }
+
+        if($imgNone) {
+            $clientsPath = Yii::$app->assetManager->getPublishedUrl('@anda/cms/clients');
+            return $clientsPath . '/images/image-none.jpg';
+        }else{
+            return null;
+        }
     }
 }

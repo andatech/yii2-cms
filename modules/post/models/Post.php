@@ -61,7 +61,7 @@ class Post extends ActiveRecord
                         'savePathAlias' => $this->masterModule->uploadDir.'/'.$this->myName.'/',
                         'urlPrefix' => $this->masterModule->uploadUrl.'/'.$this->myName.'/',
                         'width' => 200,
-                        'height' => 100,
+                        'height' => 200,
                     ],
                 ],
             ],
@@ -134,7 +134,7 @@ class Post extends ActiveRecord
 
     public static function find()
     {
-            return parent::find()
+        return parent::find()
             ->joinWith(['category cat', 'createdBy.profile prof'])
             ->where(['deleted_at' => null]);
     }
@@ -290,6 +290,8 @@ class Post extends ActiveRecord
         $filename = $imageBehavior['savePathAlias'].$this->{$attr};
         if(is_file($filename)) {
             return parent::getImageUrl($attr);
+        }else{
+            return $this->category->getimageUrl('image');
         }
 
         if($imgNone) {

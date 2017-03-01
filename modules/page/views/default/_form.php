@@ -140,6 +140,8 @@ use yii\web\JsExpression;
                 ?>
             </div>
 
+            <?php echo $form->field($model, 'content_module')->dropDownList($model->getContentModules()) ?>
+
             <?= $form->field($model, 'status')->dropDownList($model->getStatuses()) ?>
             <hr />
             <div class="form-group">
