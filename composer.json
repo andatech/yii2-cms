@@ -29,7 +29,8 @@
         "kartik-v/yii2-mpdf": "*",
         "kartik-v/yii2-detail-view": "*",
         "maxmirazh33/yii2-uploadable-cropable-image": "*",
-        "wowkaster/yii2-serialize-attributes": "dev-master"
+        "wowkaster/yii2-serialize-attributes": "dev-master",
+        "yii2tech/ar-softdelete": "*"
     },
     "autoload": {
         "psr-4": {
